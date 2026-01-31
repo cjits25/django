@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-
+T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+crossorigin="anonymous">
+ <link rel="stylesheet" href="styles.css">
+<title>LogIn and SignUp Page</title>
+</head>
+<body>
+<div class="box">
+<img src="images/icon.png">
+<div class="page">
+<div class="header">
+<a id="login" class="active" href="#login">login</a>
+<a id="signup" href="#signup">signup</a>
+</div>
+<div id="errorMsg"></div>
+<div class="content">
+<form class="login" name="loginForm" onsubmit="return validateLoginForm()"
+method="POST">
+<input type="text" name="name" id="logName"
+placeholder="Username">
+<input type="password" name="password" id="logPassword"
+placeholder="Password">
+<div id="check">
+<input type="checkbox" id="remember">
+<label for="remember">Remember me</label>
+</div>
+<br><br>
+<input type="submit" value="Login">
+<a href="#">Forgot Password?</a>
+</form>
+<form class="signup" name="signupForm" onsubmit="return validateSignupForm()"
+method="POST">
+<input type="email" name="email" id="signEmail" placeholder="Email">
+<input type="text" name="name" id="signName" placeholder="Username">
+<input type="password" name="password" id="signPassword" placeholder="Password"><br>
+<input type="submit" value="SignUp">
+</form>
+</div>
+</div>
+</div>
+<script src="jquery-3.3.1.min.js"
+integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous"></script>
+<script>
+ $(window).on("hashchange", function () {
+ if (location.hash.slice(1) == "signup") {
+$(".page").addClass("extend");
+$("#login").removeClass("active");
+$("#signup").addClass("active");
+} else {
+$(".page").removeClass("extend");
+$("#login").addClass("active");
+$("#signup").removeClass("active");
+}
+});
+$(window).trigger("hashchange");
+function validateLoginForm()
+{
+ var name = document.getElementById("logName").value;
+ var password = document.getElementById("logPassword").value;
+ if (name == "" || password == "")
+ {
+ document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
+ return false;
+ }
+ else if (password.length < 8)
+ {
+ document.getElementById("errorMsg").innerHTML = "Your password must include atleast
+8 characters"
+ return false;
+ }
+ else if(name=="cse" && password=="cse@2025")
+ {
+ alert("Successfully logged in");
+ return true;
+ }
+ else
+ {
+ document.getElementById("errorMsg").innerHTML = "You are not a authorized person to
+login!.."
+ return false;
+ }
+}
+function validateSignupForm()
+{
+ var mail = document.getElementById("signEmail").value;
+ var name = document.getElementById("signName").value;
+ var password = document.getElementById("signPassword").value;
+ if (mail == "" || name == "" || password == "")
+ {
+ document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
+ return false;
+ }
+ else if (password.length < 8)
+ {
+ document.getElementById("errorMsg").innerHTML = "Your password must include atleast
+8 characters"
+ return false;
+ }
+ else
+ {
+ alert("Successfully signed up");
+ return true;
+ }
+}
+</script>
+</body>
+</html>
